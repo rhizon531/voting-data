@@ -115,14 +115,19 @@ dataset1$vote_int[dataset1$vote_Croatia >=14] <- NA
 dataset1$vote_int[dataset1$vote_Czech>=31] <- NA
 dataset1$vote_int[dataset1$vote_Slovakia>=28] <- NA
 dataset1$vote_int[dataset1$vote_Estonia>=38] <- NA
-dataset1$vote_int[dataset1$vote_Hungary>=17] <- NA
+dataset1$vote_int[dataset1$vote_Hungary==17] <- NA
+dataset1$vote_int[dataset1$vote_Hungary>=19] <- NA
+dataset1$vote_int[dataset1$vote_Latvia==27] <- NA
 dataset1$vote_int[dataset1$vote_Latvia>=29] <- NA
+dataset1$vote_int[dataset1$vote_Lithuania==26] <- NA
 dataset1$vote_int[dataset1$vote_Lithuania>=28] <- NA
 dataset1$vote_int[dataset1$vote_Macedonia>=27] <- NA
 dataset1$vote_int[dataset1$vote_Poland>=39] <- NA
 dataset1$vote_int[dataset1$vote_Romania>=30] <- NA
-dataset1$vote_int[dataset1$vote_Russia>=39] <- NA
-dataset1$vote_int[dataset1$vote_Slovenia>=24] <- NA ## ND response?
+dataset1$vote_int[dataset1$vote_Russia==39] <- NA
+dataset1$vote_int[dataset1$vote_Russia>=41] <- NA
+dataset1$vote_int[dataset1$vote_Slovenia==22] <- NA 
+dataset1$vote_int[dataset1$vote_Slovenia>=24] <- NA 
 dataset1$vote_int[dataset1$vote_Ukraine>=25] <- NA
 dataset1$vote_int[dataset1$vote_Georgia>=28] <- NA
 dataset1$vote_int[dataset1$vote_Kazachstan>=23] <- NA
@@ -182,9 +187,8 @@ dataset1$voteinc_Moldova<-replace(dataset1$voteinc_Moldova, is.na(dataset1$votei
 
 # thingy
 
-dataset1$voteinc <- (dataset1$voteinc_Albania+dataset1$voteinc_Belarus+dataset1$voteinc_Bulgaria+dataset1$voteinc_Czech+dataset1$voteinc_Estonia+dataset1$voteinc_Hungary+dataset1$voteinc_Latvia+dataset1$voteinc_Lithuania+dataset1$voteinc_Macedonia+dataset1$voteinc_Poland+dataset1$voteinc_Romania+dataset1$voteinc_Russia+dataset1$voteinc_Slovenia+dataset1$voteinc_Ukraine+dataset1$voteinc_Georgia+dataset1$voteinc_Moldova)
+dataset1$voteinc = (dataset1$voteinc_Albania+dataset1$voteinc_Belarus+dataset1$voteinc_Bulgaria+dataset1$voteinc_Czech+dataset1$voteinc_Estonia+dataset1$voteinc_Hungary+dataset1$voteinc_Latvia+dataset1$voteinc_Lithuania+dataset1$voteinc_Macedonia+dataset1$voteinc_Poland+dataset1$voteinc_Romania+dataset1$voteinc_Russia+dataset1$voteinc_Slovenia+dataset1$voteinc_Ukraine+dataset1$voteinc_Georgia+dataset1$voteinc_Moldova)
 
-# Replace 0s to NAs
 
 #Replace 0s to NAs and no vote/spoil. no answer
 
@@ -195,14 +199,19 @@ dataset1$voteinc[dataset1$voteinc_Bulgaria>=21] <- NA
 dataset1$voteinc[dataset1$voteinc_Czech>=31] <- NA
 dataset1$voteinc[dataset1$voteinc_Slovakia>=28] <- NA
 dataset1$voteinc[dataset1$voteinc_Estonia>=38] <- NA
-dataset1$voteinc[dataset1$voteinc_Hungary>=17] <- NA
+dataset1$voteinc[dataset1$voteinc_Hungary==17] <- NA
+dataset1$voteinc[dataset1$voteinc_Hungary>=19] <- NA
+dataset1$voteinc[dataset1$voteinc_Latvia==27] <- NA
 dataset1$voteinc[dataset1$voteinc_Latvia>=29] <- NA
+dataset1$voteinc[dataset1$voteinc_Lithuania==26] <- NA
 dataset1$voteinc[dataset1$voteinc_Lithuania>=28] <- NA
 dataset1$voteinc[dataset1$voteinc_Macedonia>=27] <- NA
 dataset1$voteinc[dataset1$voteinc_Poland>=39] <- NA
 dataset1$voteinc[dataset1$voteinc_Romania>=30] <- NA
-dataset1$voteinc[dataset1$voteinc_Russia>=39] <- NA
-dataset1$voteinc[dataset1$voteinc_Slovenia>=24] <- NA ## ND response?
+dataset1$voteinc[dataset1$voteinc_Russia==39] <- NA
+dataset1$voteinc[dataset1$voteinc_Russia>=41] <- NA
+dataset1$voteinc[dataset1$voteinc_Slovenia==22] <- NA 
+dataset1$voteinc[dataset1$voteinc_Slovenia>=24] <- NA 
 dataset1$voteinc[dataset1$voteinc_Ukraine>=25] <- NA
 dataset1$voteinc[dataset1$voteinc_Georgia>=28] <- NA
 dataset1$voteinc[dataset1$voteinc_Moldova>=17] <- NA
