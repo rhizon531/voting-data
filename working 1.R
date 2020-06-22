@@ -26,13 +26,26 @@ dataset1 <- read_data(
 
 
 
-## keeping variables ZA3521
+## ZA3521 dataset 2
 
 dataset2$nation2 <- factor(dataset2$nation2, levels = c(1:17), labels = c("France", "Belgium", "Netherlands", "Germany", "Italy", "Luxembourg", "Denmark", "Ireland", "UK", "Greece", "Spain", "Portugal", "Norway", "Finland", "Sweden", "Austria", "Switzerland"))
 dataset2$country_year <- paste(dataset2$nation2, dataset2$year, sep="_")
 
-dataset2 <- dataset2 %>% select(country_year, id, split, eb, better, econpast, finapast, satisdmo, closepty, feelclo, voteint, inclvote, lastvote, particip, lrs, party, married, educ, sex, age, sizehh, occup, soclass, income, regionat)
+dataset2 <- dataset2 %>% select(country_year, country=nation2, year, id, id2=split, id3=eb, better, econpast, finapast, satisdmo, closepty, feelclo, voteint, inclvote, lastvote, particip, lrs, party, married, educ, sex, age, sizehh, occup, soclass, income, region=regionat)
+
+
 View(dataset2)
+
+
+## dataset 2 missing cases
+dataset2$voteint<-replace(dataset2$voteint, is.na(dataset2$voteint), 0)
+dataset2$inclvote<-replace(dataset2$inclvote, is.na(dataset2$inclvote), 0)
+dataset2$voteint[dataset2$voteint<=99] <- NA
+dataset2$voteint[dataset2$voteint>=990] <- NA
+dataset2$inclvote[dataset2$inclvote<=99] <- NA
+dataset2$inclvote[dataset2$inclvote>=990] <- NA
+
+table(dataset2$country, dataset2$voteint)
 
 ## ZA3648 - 
 
@@ -104,7 +117,7 @@ table(dataset1$country,dataset1$vote_int)
 View(dataset1)
 
 
-#Replace 0s to NAs and no vote/spoil. no answer
+#Replace 0s to NAs and no vote/spoil. no answer; DONT RUN YET
 
 dataset1$vote_int[dataset1$vote_int==0] <- NA
 dataset1$vote_int[dataset1$vote_Albania>=24] <- NA
@@ -171,7 +184,7 @@ dataset1$voteinc_Belarus<-replace(dataset1$voteinc_Belarus, is.na(dataset1$votei
 dataset1$voteinc_Bulgaria<-replace(dataset1$voteinc_Bulgaria, is.na(dataset1$voteinc_Bulgaria), 0)
 dataset1$voteinc_Czech<-replace(dataset1$voteinc_Czech, is.na(dataset1$voteinc_Czech), 0)
 dataset1$voteinc_Slovakia<-replace(dataset1$voteinc_Slovakia, is.na(dataset1$voteinc_Slovakia), 0)
-dataset1$voteinc_Estonia-replace(dataset1$voteinc_Estonia, is.na(dataset1$voteinc_Estonia), 0)
+dataset1$voteinc_Estonia<-replace(dataset1$voteinc_Estonia, is.na(dataset1$voteinc_Estonia), 0)
 dataset1$voteinc_Hungary<-replace(dataset1$voteinc_Hungary, is.na(dataset1$voteinc_Hungary), 0)
 dataset1$voteinc_Latvia<-replace(dataset1$voteinc_Latvia, is.na(dataset1$voteinc_Latvia), 0)
 dataset1$voteinc_Lithuania<-replace(dataset1$voteinc_Lithuania, is.na(dataset1$voteinc_Lithuania), 0)
@@ -190,7 +203,7 @@ dataset1$voteinc_Moldova<-replace(dataset1$voteinc_Moldova, is.na(dataset1$votei
 dataset1$voteinc = (dataset1$voteinc_Albania+dataset1$voteinc_Belarus+dataset1$voteinc_Bulgaria+dataset1$voteinc_Czech+dataset1$voteinc_Estonia+dataset1$voteinc_Hungary+dataset1$voteinc_Latvia+dataset1$voteinc_Lithuania+dataset1$voteinc_Macedonia+dataset1$voteinc_Poland+dataset1$voteinc_Romania+dataset1$voteinc_Russia+dataset1$voteinc_Slovenia+dataset1$voteinc_Ukraine+dataset1$voteinc_Georgia+dataset1$voteinc_Moldova)
 
 
-#Replace 0s to NAs and no vote/spoil. no answer
+#Replace 0s to NAs and no vote/spoil. no answer; DON'T RUN YET
 
 dataset1$voteinc[dataset1$voteinc==0] <- NA
 dataset1$voteinc[dataset1$voteinc_Albania>=24] <- NA
@@ -220,4 +233,23 @@ table(dataset1$voteinc)
 table(dataset1$country,dataset1$voteinc)
 
 
+# merge variables
+dataset1$vote <- paste(dataset1$vote_int,dataset1$voteinc, sep = "_")
+table(dataset1$country,dataset1$vote)
 
+
+# condense dataset1
+
+dataset1 <- dataset1 %>% select(country_year, country=V3, year=V4, id=V6, better=V11, econpast=V10, finapast=V12, satisdmo=V19, voteint=vote_int, lrs=V76, married=V125, educ=V128, sex=V119, age=V120, sizehh=V126, occup=V132)
+
+
+# NA to 0s full set
+dataset1<-replace(dataset1, is.na(dataset1), 0)
+dataset2<-replace(dataset2, is.na(dataset2), 0)
+
+
+# merge dataset
+datasetfull <- merge(dataset1, dataset2, by="country_year", all=TRUE)
+save(datasetfull, file="EAEurobarometer.RData")
+
+datasetfull$voteint <- (datasetfull$voteint.x+datasetfull$voteint.y)
