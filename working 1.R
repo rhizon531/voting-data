@@ -53,6 +53,11 @@ dataset1$country <- factor(dataset1$V3, levels = c(1:22), labels = c("Albania", 
 dataset1$country_year <- paste(dataset1$country, dataset1$V4,sep="_")
 
 
+
+# Test by country
+table(dataset1$country,dataset1$vote_int)
+View(dataset1)
+
 #start by creating new variable for each V79:V100
 
 dataset1<-dataset1 %>% mutate(vote_Albania=V79)
@@ -79,7 +84,6 @@ dataset1<-dataset1 %>% mutate(vote_GDR=V99)
 dataset1<-dataset1 %>% mutate(vote_Moldova=V100)
 
 
-
 ## Replace NAs to 0
 dataset1$vote_Albania<-replace(dataset1$vote_Albania, is.na(dataset1$vote_Albania), 0)
 dataset1$vote_Armenia<-replace(dataset1$vote_Armenia, is.na(dataset1$vote_Armenia), 0)
@@ -104,20 +108,7 @@ dataset1$vote_Yugoslavia<-replace(dataset1$vote_Yugoslavia, is.na(dataset1$vote_
 dataset1$vote_GDR<-replace(dataset1$vote_GDR, is.na(dataset1$vote_GDR), 0)
 dataset1$vote_Moldova<-replace(dataset1$vote_Moldova, is.na(dataset1$vote_Moldova), 0)
 
-
-
-# Add all relevant columns to get the sum; if NA then you get 0 otherwise the value of the party
-#dataset1$vote_int <- (dataset1$vote_Albania+dataset1$vote_Armenia+dataset1$vote_Belarus+dataset1$V82+dataset1$V83+dataset1$V84+dataset1$V85+dataset1$V86+dataset1$V87+dataset1$V88+dataset1$V89+dataset1$V90+dataset1$V91+dataset1$V92+dataset1$V93+dataset1$V94+dataset1$V95+dataset1$V96+dataset1$V97+dataset1$V98+dataset1$V99+dataset1$V100)
-
-
-dataset1$vote_int = (dataset1$vote_Albania+dataset1$vote_Armenia+dataset1$vote_Belarus+dataset1$vote_Bulgaria+dataset1$vote_Croatia+dataset1$vote_Czech+dataset1$vote_Slovakia+dataset1$vote_Estonia+dataset1$vote_Hungary+dataset1$vote_Latvia+dataset1$vote_Lithuania+dataset1$vote_Macedonia+dataset1$vote_Poland+dataset1$vote_Romania+dataset1$vote_Russia+dataset1$vote_Slovenia+dataset1$vote_Ukraine+dataset1$vote_Georgia+dataset1$vote_Kazachstan+dataset1$vote_Yugoslavia+dataset1$vote_GDR+dataset1$vote_Moldova) 
-
-# Test by country
-table(dataset1$country,dataset1$vote_int)
-View(dataset1)
-
-
-#Replace 0s to NAs and no vote/spoil. no answer; DONT RUN YET
+#Replace 0s to NAs and no vote/spoil. no answer
 
 dataset1$vote_int[dataset1$vote_int==0] <- NA
 dataset1$vote_int[dataset1$vote_Albania>=24] <- NA
@@ -148,8 +139,19 @@ dataset1$vote_int[dataset1$vote_Yugoslavia>=17] <- NA
 dataset1$vote_int[dataset1$vote_GDR>=17] <- NA
 dataset1$vote_int[dataset1$vote_Moldova>=17] <- NA
 
+
+# Add all relevant columns to get the sum; if NA then you get 0 otherwise the value of the party
+#dataset1$vote_int <- (dataset1$vote_Albania+dataset1$vote_Armenia+dataset1$vote_Belarus+dataset1$V82+dataset1$V83+dataset1$V84+dataset1$V85+dataset1$V86+dataset1$V87+dataset1$V88+dataset1$V89+dataset1$V90+dataset1$V91+dataset1$V92+dataset1$V93+dataset1$V94+dataset1$V95+dataset1$V96+dataset1$V97+dataset1$V98+dataset1$V99+dataset1$V100)
+
+
+dataset1$vote_int = (dataset1$vote_Albania+dataset1$vote_Armenia+dataset1$vote_Belarus+dataset1$vote_Bulgaria+dataset1$vote_Croatia+dataset1$vote_Czech+dataset1$vote_Slovakia+dataset1$vote_Estonia+dataset1$vote_Hungary+dataset1$vote_Latvia+dataset1$vote_Lithuania+dataset1$vote_Macedonia+dataset1$vote_Poland+dataset1$vote_Romania+dataset1$vote_Russia+dataset1$vote_Slovenia+dataset1$vote_Ukraine+dataset1$vote_Georgia+dataset1$vote_Kazachstan+dataset1$vote_Yugoslavia+dataset1$vote_GDR+dataset1$vote_Moldova) 
+
+
+
 table(dataset1$vote_int)
 table(dataset1$country,dataset1$vote_int)
+
+
 
 
 
@@ -200,7 +202,7 @@ dataset1$voteinc_Moldova<-replace(dataset1$voteinc_Moldova, is.na(dataset1$votei
 dataset1$voteinc = (dataset1$voteinc_Albania+dataset1$voteinc_Belarus+dataset1$voteinc_Bulgaria+dataset1$voteinc_Czech+dataset1$voteinc_Estonia+dataset1$voteinc_Hungary+dataset1$voteinc_Latvia+dataset1$voteinc_Lithuania+dataset1$voteinc_Macedonia+dataset1$voteinc_Poland+dataset1$voteinc_Romania+dataset1$voteinc_Russia+dataset1$voteinc_Slovenia+dataset1$voteinc_Ukraine+dataset1$voteinc_Georgia+dataset1$voteinc_Moldova)
 
 
-#Replace 0s to NAs and no vote/spoil. no answer; DON'T RUN YET
+#Replace 0s to NAs and no vote/spoil. no answer
 
 dataset1$voteinc[dataset1$voteinc==0] <- NA
 dataset1$voteinc[dataset1$voteinc_Albania>=24] <- NA
@@ -228,6 +230,99 @@ dataset1$voteinc[dataset1$voteinc_Moldova>=17] <- NA
 
 table(dataset1$voteinc)
 table(dataset1$country,dataset1$voteinc)
+
+# dataset1 income merging
+
+#start by creating new variable for each V79:V100
+
+dataset1<-dataset1 %>% mutate(income_Albania=V135)
+dataset1<-dataset1 %>% mutate(income_Armenia=V136)
+dataset1<-dataset1 %>% mutate(income_Armenia=V137)
+dataset1<-dataset1 %>% mutate(income_Armenia=V138)
+dataset1<-dataset1 %>% mutate(income_Belarus=V139)
+dataset1<-dataset1 %>% mutate(income_Belarus=V140)
+dataset1<-dataset1 %>% mutate(income_Bulgaria=V141)
+dataset1<-dataset1 %>% mutate(income_Bulgaria=V142)
+dataset1<-dataset1 %>% mutate(income_Bulgaria=V143)
+dataset1<-dataset1 %>% mutate(income_Bulgaria=V144)
+dataset1<-dataset1 %>% mutate(income_Bulgaria=V145)
+dataset1<-dataset1 %>% mutate(income_Croatia=V146)
+dataset1<-dataset1 %>% mutate(income_CSSR=V147)
+dataset1<-dataset1 %>% mutate(income_Czech=V148)
+dataset1<-dataset1 %>% mutate(income_Czech=V149)
+dataset1<-dataset1 %>% mutate(income_Slovakia=V150)
+dataset1<-dataset1 %>% mutate(income_Slovakia=V151)
+dataset1<-dataset1 %>% mutate(income_Slovakia=V152)
+dataset1<-dataset1 %>% mutate(income_Estonia=V153)
+dataset1<-dataset1 %>% mutate(income_Estonia=V154)
+dataset1<-dataset1 %>% mutate(income_Estonia=V155)
+dataset1<-dataset1 %>% mutate(income_Estonia=V156)
+dataset1<-dataset1 %>% mutate(income_Hungary=V157)
+dataset1<-dataset1 %>% mutate(income_Hungary=V158)
+dataset1<-dataset1 %>% mutate(income_Hungary=V159)
+dataset1<-dataset1 %>% mutate(income_Latvia=V160)
+dataset1<-dataset1 %>% mutate(income_Latvia=V161)
+dataset1<-dataset1 %>% mutate(income_Latvia=V162)
+dataset1<-dataset1 %>% mutate(income_Lithuania=V163)
+dataset1<-dataset1 %>% mutate(income_Lithuania=V164)
+dataset1<-dataset1 %>% mutate(income_Lithuania=V165)
+dataset1<-dataset1 %>% mutate(income_Macedonia=V166)
+dataset1<-dataset1 %>% mutate(income_Macedonia=V167)
+dataset1<-dataset1 %>% mutate(income_Poland=V168)
+dataset1<-dataset1 %>% mutate(income_Poland=V169)
+dataset1<-dataset1 %>% mutate(income_Poland=V170)
+dataset1<-dataset1 %>% mutate(income_Romania=V171)
+dataset1<-dataset1 %>% mutate(income_Romania=V172)
+dataset1<-dataset1 %>% mutate(income_Romania=V173)
+dataset1<-dataset1 %>% mutate(income_Russia=V174)
+dataset1<-dataset1 %>% mutate(income_Russia=V175)
+dataset1<-dataset1 %>% mutate(income_Russia=V176)
+dataset1<-dataset1 %>% mutate(income_Slovenia=V177)
+dataset1<-dataset1 %>% mutate(income_Slovenia=V178)
+dataset1<-dataset1 %>% mutate(income_Ukraine=V179)
+dataset1<-dataset1 %>% mutate(income_Ukraine=V180)
+dataset1<-dataset1 %>% mutate(income_Ukraine=V181)
+dataset1<-dataset1 %>% mutate(income_Georgia=V182)
+dataset1<-dataset1 %>% mutate(income_Georgia=V183)
+dataset1<-dataset1 %>% mutate(income_Georgia=V184)
+dataset1<-dataset1 %>% mutate(income_Kazachstan=V185)
+dataset1<-dataset1 %>% mutate(income_Kazachstan=V186)
+dataset1<-dataset1 %>% mutate(income_Yugoslavia=V187)
+dataset1<-dataset1 %>% mutate(income_GDR=V188)
+
+
+
+## Replace NAs to 0
+dataset1$income_Albania<-replace(dataset1$income_Albania, is.na(dataset1$income_Albania), 0)
+dataset1$income_Armenia<-replace(dataset1$income_Armenia, is.na(dataset1$income_Armenia), 0)
+dataset1$income_Belarus<-replace(dataset1$income_Belarus, is.na(dataset1$income_Belarus), 0)
+dataset1$income_Bulgaria<-replace(dataset1$income_Bulgaria, is.na(dataset1$income_Bulgaria), 0)
+dataset1$income_Croatia<-replace(dataset1$income_Croatia, is.na(dataset1$income_Croatia), 0)
+dataset1$income_Czech<-replace(dataset1$income_Czech, is.na(dataset1$income_Czech), 0)
+dataset1$income_Slovakia<-replace(dataset1$income_Slovakia, is.na(dataset1$income_Slovakia), 0)
+dataset1$income_Estonia<-replace(dataset1$income_Estonia, is.na(dataset1$income_Estonia), 0)
+dataset1$income_Hungary<-replace(dataset1$income_Hungary, is.na(dataset1$income_Hungary), 0)
+dataset1$income_Latvia<-replace(dataset1$income_Latvia, is.na(dataset1$income_Latvia), 0)
+dataset1$income_Lithuania<-replace(dataset1$income_Lithuania, is.na(dataset1$income_Lithuania), 0)
+dataset1$income_Macedonia<-replace(dataset1$income_Macedonia, is.na(dataset1$income_Macedonia), 0)
+dataset1$income_Poland<-replace(dataset1$income_Poland, is.na(dataset1$income_Poland), 0)
+dataset1$income_Romania<-replace(dataset1$income_Romania, is.na(dataset1$income_Romania), 0)
+dataset1$income_Russia<-replace(dataset1$income_Russia, is.na(dataset1$income_Russia), 0)
+dataset1$income_Slovenia<-replace(dataset1$income_Slovenia, is.na(dataset1$income_Slovenia), 0)
+dataset1$income_Ukraine<-replace(dataset1$income_Ukraine, is.na(dataset1$income_Ukraine), 0)
+dataset1$income_Georgia<-replace(dataset1$income_Georgia, is.na(dataset1$income_Georgia), 0)
+dataset1$income_Kazachstan<-replace(dataset1$income_Kazachstan, is.na(dataset1$income_Kazachstan), 0)
+dataset1$income_Yugoslavia<-replace(dataset1$income_Yugoslavia, is.na(dataset1$income_Yugoslavia), 0)
+dataset1$vincome_GDR<-replace(dataset1$income_GDR, is.na(dataset1$income_GDR), 0)
+
+
+
+# Add all relevant columns to get the sum; if NA then you get 0 otherwise the value of the party
+#dataset1$vote_int <- (dataset1$vote_Albania+dataset1$vote_Armenia+dataset1$vote_Belarus+dataset1$V82+dataset1$V83+dataset1$V84+dataset1$V85+dataset1$V86+dataset1$V87+dataset1$V88+dataset1$V89+dataset1$V90+dataset1$V91+dataset1$V92+dataset1$V93+dataset1$V94+dataset1$V95+dataset1$V96+dataset1$V97+dataset1$V98+dataset1$V99+dataset1$V100)
+
+
+dataset1$income = (dataset1$income_Albania+dataset1$income_Armenia+dataset1$income_Belarus+dataset1$income_Bulgaria+dataset1$income_Croatia+dataset1$income_Czech+dataset1$income_Slovakia+dataset1$income_Estonia+dataset1$income_Hungary+dataset1$income_Latvia+dataset1$income_Lithuania+dataset1$income_Macedonia+dataset1$income_Poland+dataset1$income_Romania+dataset1$income_Russia+dataset1$income_Slovenia+dataset1$income_Ukraine+dataset1$income_Georgia+dataset1$income_Kazachstan+dataset1$income_Yugoslavia+dataset1$income_GDR) 
+
 
 
 
