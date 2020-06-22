@@ -152,9 +152,6 @@ table(dataset1$vote_int)
 table(dataset1$country,dataset1$vote_int)
 
 
-# Save the dataset
-save(dataset1, file="EAEurobarometer.RData")
-
 
 # mutating vote incl variables
 
@@ -233,23 +230,13 @@ table(dataset1$voteinc)
 table(dataset1$country,dataset1$voteinc)
 
 
-# merge variables
-dataset1$vote <- paste(dataset1$vote_int,dataset1$voteinc, sep = "_")
-table(dataset1$country,dataset1$vote)
-
 
 # condense dataset1
 
-dataset1 <- dataset1 %>% select(country_year, country=V3, year=V4, id=V6, better=V11, econpast=V10, finapast=V12, satisdmo=V19, voteint=vote_int, lrs=V76, married=V125, educ=V128, sex=V119, age=V120, sizehh=V126, occup=V132)
-
-
-# NA to 0s full set
-dataset1<-replace(dataset1, is.na(dataset1), 0)
-dataset2<-replace(dataset2, is.na(dataset2), 0)
+dataset1 <- dataset1 %>% select(country_year, country=V3, year=V4, id=V6, better=V11, econpast=V10, finapast=V12, satisdmo=V19, voteint=vote_int, inclvote=voteinc, lrs=V76, married=V125, educ=V128, sex=V119, age=V120, sizehh=V126, occup=V132)
 
 
 # merge dataset
 datasetfull <- merge(dataset1, dataset2, by="country_year", all=TRUE)
 save(datasetfull, file="EAEurobarometer.RData")
 
-datasetfull$voteint <- (datasetfull$voteint.x+datasetfull$voteint.y)
