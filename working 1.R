@@ -229,9 +229,6 @@ table(dataset1$country,dataset1$voteinc)
 
 # dataset1 income merging
 
-
-
-## DONT RUN DONT RUN DONT RUN
 dataset1$V135<-replace(dataset1$V135, is.na(dataset1$V135), 0)
 dataset1$V136<-replace(dataset1$V136, is.na(dataset1$V136), 0)
 dataset1$V137<-replace(dataset1$V137, is.na(dataset1$V137), 0)
@@ -287,24 +284,50 @@ dataset1$V186<-replace(dataset1$V186, is.na(dataset1$V186), 0)
 dataset1$V187<-replace(dataset1$V187, is.na(dataset1$V187), 0)
 dataset1$V188<-replace(dataset1$V188, is.na(dataset1$V188), 0)
 
-# YEET
-
 dataset1$income = dataset1$V135+dataset1$V136+dataset1$V137+dataset1$V138+dataset1$V139+dataset1$V140+dataset1$V141+dataset1$V142+dataset1$V143+dataset1$V144+dataset1$V145+dataset1$V146+dataset1$V147+dataset1$V148+dataset1$V149+dataset1$V150+dataset1$V151+dataset1$V152+dataset1$V153+dataset1$V154+dataset1$V155+dataset1$V156+dataset1$V157+dataset1$V158+dataset1$V159+dataset1$V160+dataset1$V161+dataset1$V162+dataset1$V163+dataset1$V164+dataset1$V165+dataset1$V166+dataset1$V167+dataset1$V168+dataset1$V169+dataset1$V170+dataset1$V171+dataset1$V172+dataset1$V173+dataset1$V174+dataset1$V175+dataset1$V176+dataset1$V177+dataset1$V178+dataset1$V179+dataset1$V180+dataset1$V181+dataset1$V182+dataset1$V183+dataset1$V184+dataset1$V185+dataset1$V186+dataset1$V187+dataset1$V188
-
-
-# RUN
 
 dataset1$income[dataset1$income==0] <- NA
 dataset1$income[dataset1$income>=17] <-NA
 
 
+# region merging
+
+dataset1$V215<-replace(dataset1$V215, is.na(dataset1$V215), 0)
+dataset1$V216<-replace(dataset1$V216, is.na(dataset1$V216), 0)
+dataset1$V217<-replace(dataset1$V217, is.na(dataset1$V217), 0)
+dataset1$V218<-replace(dataset1$V218, is.na(dataset1$V218), 0)
+dataset1$V219<-replace(dataset1$V219, is.na(dataset1$V219), 0)
+dataset1$V220<-replace(dataset1$V220, is.na(dataset1$V220), 0)
+dataset1$V221<-replace(dataset1$V221, is.na(dataset1$V221), 0)
+dataset1$V222<-replace(dataset1$V222, is.na(dataset1$V222), 0)
+dataset1$V223<-replace(dataset1$V223, is.na(dataset1$V223), 0)
+dataset1$V224<-replace(dataset1$V224, is.na(dataset1$V224), 0)
+dataset1$V225<-replace(dataset1$V225, is.na(dataset1$V225), 0)
+dataset1$V226<-replace(dataset1$V226, is.na(dataset1$V226), 0)
+dataset1$V227<-replace(dataset1$V227, is.na(dataset1$V227), 0)
+dataset1$V228<-replace(dataset1$V228, is.na(dataset1$V228), 0)
+dataset1$V229<-replace(dataset1$V228, is.na(dataset1$V229), 0)
+dataset1$V230<-replace(dataset1$V230, is.na(dataset1$V230), 0)
+dataset1$V231<-replace(dataset1$V231, is.na(dataset1$V231), 0)
+dataset1$V232<-replace(dataset1$V232, is.na(dataset1$V232), 0)
+dataset1$V233<-replace(dataset1$V233, is.na(dataset1$V233), 0)
+dataset1$V234<-replace(dataset1$V234, is.na(dataset1$V234), 0)
+dataset1$V235<-replace(dataset1$V235, is.na(dataset1$V235), 0)
+dataset1$V236<-replace(dataset1$V236, is.na(dataset1$V236), 0)
+
+dataset1$region = (dataset1$V215+dataset1$V216+dataset1$V217+dataset1$V218+dataset1$V219+dataset1$V220+dataset1$V221+dataset1$V222+dataset1$V223+dataset1$V224+dataset1$V225+dataset1$V226+dataset1$V227+dataset1$V228+dataset1$V229+dataset1$V230+dataset1$V231+dataset1$V232+dataset1$V233+dataset1$V234+dataset1$V235+dataset1$V236)
+
+dataset1$region[dataset1$region==0] <- NA
+dataset1$region[dataset1$region>=9] <- NA
+
+
 # condense dataset1
 
-dataset1 <- dataset1 %>% select(country_year, country=V3, year=V4, id=V6, better=V11, econpast=V10, finapast=V12, satisdmo=V19, voteint=vote_int, inclvote=voteinc, lrs=V76, married=V125, educ=V128, sex=V119, age=V120, sizehh=V126, occup=V132, income=income)
+dataset1 <- dataset1 %>% select(country_year, country=V3, year=V4, id=V6, better=V11, econpast=V10, finapast=V12, satisdmo=V19, voteint=vote_int, inclvote=voteinc, lrs=V76, married=V125, educ=V128, sex=V119, age=V120, sizehh=V126, occup=V132, income=income, region=region)
 
 
 # merge dataset
-datasetfull <- merge(dataset1, dataset2, by=c("country_year", "country", "year", "id", "better", "econpast", "finapast", "satisdmo", "voteint", "inclvote", "lrs", "married", "educ", "sex", "age", "sizehh", "occup", "income"), all=TRUE)
+datasetfull <- merge(dataset1, dataset2, by=c("country_year", "country", "year", "id", "better", "econpast", "finapast", "satisdmo", "voteint", "inclvote", "lrs", "married", "educ", "sex", "age", "sizehh", "occup", "income", "region"), all=TRUE)
 save(datasetfull, file="EAEurobarometer.RData")
 
 
