@@ -7,6 +7,7 @@ library(dplyr)
 library(pmdplyr)
 library(tidyr)
 library(sjlabelled)
+library(haven)
 
 
 ## attempt 1
@@ -52,11 +53,6 @@ table(dataset2$country, dataset2$voteint)
 dataset1$country <- factor(dataset1$V3, levels = c(1:22), labels = c("Albania", "Armenia", "Belarus", "Bulgaria", "Croatia", "CzechRepublic", "Slovakia", "Estonia", "Georgia", "Hungary", "Latvia", "Lithuania", "Macedonia", "Moldova", "Poland", "Romania", "Russia", "Slovenia", "Ukraine", "Kazakhstan", "Yugoslavia", "GDR"))
 dataset1$country_year <- paste(dataset1$country, dataset1$V4,sep="_")
 
-
-
-# Test by country
-table(dataset1$country,dataset1$vote_int)
-View(dataset1)
 
 #start by creating new variable for each V79:V100
 
@@ -233,154 +229,82 @@ table(dataset1$country,dataset1$voteinc)
 
 # dataset1 income merging
 
-#start by creating new variable for each V79:V100
-
-dataset1<-dataset1 %>% mutate(income_Albania=V135)
-dataset1<-dataset1 %>% mutate(income_Armenia=V136)
-dataset1<-dataset1 %>% mutate(income_Armenia=V137)
-dataset1<-dataset1 %>% mutate(income_Armenia=V138)
-dataset1<-dataset1 %>% mutate(income_Belarus=V139)
-dataset1<-dataset1 %>% mutate(income_Belarus=V140)
-dataset1<-dataset1 %>% mutate(income_Bulgaria=V141)
-dataset1<-dataset1 %>% mutate(income_Bulgaria=V142)
-dataset1<-dataset1 %>% mutate(income_Bulgaria=V143)
-dataset1<-dataset1 %>% mutate(income_Bulgaria=V144)
-dataset1<-dataset1 %>% mutate(income_Bulgaria=V145)
-dataset1<-dataset1 %>% mutate(income_Croatia=V146)
-dataset1<-dataset1 %>% mutate(income_CSSR=V147)
-dataset1<-dataset1 %>% mutate(income_Czech=V148)
-dataset1<-dataset1 %>% mutate(income_Czech=V149)
-dataset1<-dataset1 %>% mutate(income_Slovakia=V150)
-dataset1<-dataset1 %>% mutate(income_Slovakia=V151)
-dataset1<-dataset1 %>% mutate(income_Slovakia=V152)
-dataset1<-dataset1 %>% mutate(income_Estonia=V153)
-dataset1<-dataset1 %>% mutate(income_Estonia=V154)
-dataset1<-dataset1 %>% mutate(income_Estonia=V155)
-dataset1<-dataset1 %>% mutate(income_Estonia=V156)
-dataset1<-dataset1 %>% mutate(income_Hungary=V157)
-dataset1<-dataset1 %>% mutate(income_Hungary=V158)
-dataset1<-dataset1 %>% mutate(income_Hungary=V159)
-dataset1<-dataset1 %>% mutate(income_Latvia=V160)
-dataset1<-dataset1 %>% mutate(income_Latvia=V161)
-dataset1<-dataset1 %>% mutate(income_Latvia=V162)
-dataset1<-dataset1 %>% mutate(income_Lithuania=V163)
-dataset1<-dataset1 %>% mutate(income_Lithuania=V164)
-dataset1<-dataset1 %>% mutate(income_Lithuania=V165)
-dataset1<-dataset1 %>% mutate(income_Macedonia=V166)
-dataset1<-dataset1 %>% mutate(income_Macedonia=V167)
-dataset1<-dataset1 %>% mutate(income_Poland=V168)
-dataset1<-dataset1 %>% mutate(income_Poland=V169)
-dataset1<-dataset1 %>% mutate(income_Poland=V170)
-dataset1<-dataset1 %>% mutate(income_Romania=V171)
-dataset1<-dataset1 %>% mutate(income_Romania=V172)
-dataset1<-dataset1 %>% mutate(income_Romania=V173)
-dataset1<-dataset1 %>% mutate(income_Russia=V174)
-dataset1<-dataset1 %>% mutate(income_Russia=V175)
-dataset1<-dataset1 %>% mutate(income_Russia=V176)
-dataset1<-dataset1 %>% mutate(income_Slovenia=V177)
-dataset1<-dataset1 %>% mutate(income_Slovenia=V178)
-dataset1<-dataset1 %>% mutate(income_Ukraine=V179)
-dataset1<-dataset1 %>% mutate(income_Ukraine=V180)
-dataset1<-dataset1 %>% mutate(income_Ukraine=V181)
-dataset1<-dataset1 %>% mutate(income_Georgia=V182)
-dataset1<-dataset1 %>% mutate(income_Georgia=V183)
-dataset1<-dataset1 %>% mutate(income_Georgia=V184)
-dataset1<-dataset1 %>% mutate(income_Kazachstan=V185)
-dataset1<-dataset1 %>% mutate(income_Kazachstan=V186)
-dataset1<-dataset1 %>% mutate(income_Yugoslavia=V187)
-dataset1<-dataset1 %>% mutate(income_GDR=V188)
 
 
+## DONT RUN DONT RUN DONT RUN
+dataset1$V135<-replace(dataset1$V135, is.na(dataset1$V135), 0)
+dataset1$V136<-replace(dataset1$V136, is.na(dataset1$V136), 0)
+dataset1$V137<-replace(dataset1$V137, is.na(dataset1$V137), 0)
+dataset1$V138<-replace(dataset1$V138, is.na(dataset1$V138), 0)
+dataset1$V139<-replace(dataset1$V139, is.na(dataset1$V139), 0)
+dataset1$V140<-replace(dataset1$V140, is.na(dataset1$V140), 0)
+dataset1$V141<-replace(dataset1$V141, is.na(dataset1$V141), 0)
+dataset1$V142<-replace(dataset1$V142, is.na(dataset1$V142), 0)
+dataset1$V143<-replace(dataset1$V143, is.na(dataset1$V143), 0)
+dataset1$V144<-replace(dataset1$V144, is.na(dataset1$V144), 0)
+dataset1$V145<-replace(dataset1$V145, is.na(dataset1$V145), 0)
+dataset1$V146<-replace(dataset1$V146, is.na(dataset1$V146), 0)
+dataset1$V147<-replace(dataset1$V147, is.na(dataset1$V147), 0)
+dataset1$V148<-replace(dataset1$V148, is.na(dataset1$V148), 0)
+dataset1$V149<-replace(dataset1$V149, is.na(dataset1$V149), 0)
+dataset1$V150<-replace(dataset1$V150, is.na(dataset1$V150), 0)
+dataset1$V151<-replace(dataset1$V151, is.na(dataset1$V151), 0)
+dataset1$V152<-replace(dataset1$V152, is.na(dataset1$V152), 0)
+dataset1$V153<-replace(dataset1$V153, is.na(dataset1$V153), 0)
+dataset1$V154<-replace(dataset1$V154, is.na(dataset1$V154), 0)
+dataset1$V155<-replace(dataset1$V155, is.na(dataset1$V155), 0)
+dataset1$V156<-replace(dataset1$V156, is.na(dataset1$V156), 0)
+dataset1$V157<-replace(dataset1$V157, is.na(dataset1$V157), 0)
+dataset1$V158<-replace(dataset1$V158, is.na(dataset1$V158), 0)
+dataset1$V159<-replace(dataset1$V159, is.na(dataset1$V159), 0)
+dataset1$V160<-replace(dataset1$V160, is.na(dataset1$V160), 0)
+dataset1$V161<-replace(dataset1$V161, is.na(dataset1$V161), 0)
+dataset1$V162<-replace(dataset1$V162, is.na(dataset1$V162), 0)
+dataset1$V163<-replace(dataset1$V163, is.na(dataset1$V163), 0)
+dataset1$V164<-replace(dataset1$V164, is.na(dataset1$V164), 0)
+dataset1$V165<-replace(dataset1$V165, is.na(dataset1$V165), 0)
+dataset1$V166<-replace(dataset1$V166, is.na(dataset1$V166), 0)
+dataset1$V167<-replace(dataset1$V167, is.na(dataset1$V167), 0)
+dataset1$V168<-replace(dataset1$V168, is.na(dataset1$V168), 0)
+dataset1$V169<-replace(dataset1$V169, is.na(dataset1$V169), 0)
+dataset1$V170<-replace(dataset1$V170, is.na(dataset1$V170), 0)
+dataset1$V171<-replace(dataset1$V171, is.na(dataset1$V171), 0)
+dataset1$V172<-replace(dataset1$V172, is.na(dataset1$V172), 0)
+dataset1$V173<-replace(dataset1$V173, is.na(dataset1$V173), 0)
+dataset1$V174<-replace(dataset1$V174, is.na(dataset1$V174), 0)
+dataset1$V175<-replace(dataset1$V175, is.na(dataset1$V175), 0)
+dataset1$V176<-replace(dataset1$V176, is.na(dataset1$V176), 0)
+dataset1$V177<-replace(dataset1$V177, is.na(dataset1$V177), 0)
+dataset1$V178<-replace(dataset1$V178, is.na(dataset1$V178), 0)
+dataset1$V179<-replace(dataset1$V179, is.na(dataset1$V179), 0)
+dataset1$V180<-replace(dataset1$V180, is.na(dataset1$V180), 0)
+dataset1$V181<-replace(dataset1$V181, is.na(dataset1$V181), 0)
+dataset1$V182<-replace(dataset1$V182, is.na(dataset1$V182), 0)
+dataset1$V183<-replace(dataset1$V183, is.na(dataset1$V183), 0)
+dataset1$V184<-replace(dataset1$V184, is.na(dataset1$V184), 0)
+dataset1$V185<-replace(dataset1$V185, is.na(dataset1$V185), 0)
+dataset1$V186<-replace(dataset1$V186, is.na(dataset1$V186), 0)
+dataset1$V187<-replace(dataset1$V187, is.na(dataset1$V187), 0)
+dataset1$V188<-replace(dataset1$V188, is.na(dataset1$V188), 0)
 
-## Replace NAs to 0
-dataset1$income_Albania<-replace(dataset1$income_Albania, is.na(dataset1$income_Albania), 0)
-dataset1$income_Armenia<-replace(dataset1$income_Armenia, is.na(dataset1$income_Armenia), 0)
-dataset1$income_Belarus<-replace(dataset1$income_Belarus, is.na(dataset1$income_Belarus), 0)
-dataset1$income_Bulgaria<-replace(dataset1$income_Bulgaria, is.na(dataset1$income_Bulgaria), 0)
-dataset1$income_Croatia<-replace(dataset1$income_Croatia, is.na(dataset1$income_Croatia), 0)
-dataset1$income_Czech<-replace(dataset1$income_Czech, is.na(dataset1$income_Czech), 0)
-dataset1$income_Slovakia<-replace(dataset1$income_Slovakia, is.na(dataset1$income_Slovakia), 0)
-dataset1$income_Estonia<-replace(dataset1$income_Estonia, is.na(dataset1$income_Estonia), 0)
-dataset1$income_Hungary<-replace(dataset1$income_Hungary, is.na(dataset1$income_Hungary), 0)
-dataset1$income_Latvia<-replace(dataset1$income_Latvia, is.na(dataset1$income_Latvia), 0)
-dataset1$income_Lithuania<-replace(dataset1$income_Lithuania, is.na(dataset1$income_Lithuania), 0)
-dataset1$income_Macedonia<-replace(dataset1$income_Macedonia, is.na(dataset1$income_Macedonia), 0)
-dataset1$income_Poland<-replace(dataset1$income_Poland, is.na(dataset1$income_Poland), 0)
-dataset1$income_Romania<-replace(dataset1$income_Romania, is.na(dataset1$income_Romania), 0)
-dataset1$income_Russia<-replace(dataset1$income_Russia, is.na(dataset1$income_Russia), 0)
-dataset1$income_Slovenia<-replace(dataset1$income_Slovenia, is.na(dataset1$income_Slovenia), 0)
-dataset1$income_Ukraine<-replace(dataset1$income_Ukraine, is.na(dataset1$income_Ukraine), 0)
-dataset1$income_Georgia<-replace(dataset1$income_Georgia, is.na(dataset1$income_Georgia), 0)
-dataset1$income_Kazachstan<-replace(dataset1$income_Kazachstan, is.na(dataset1$income_Kazachstan), 0)
-dataset1$income_Yugoslavia<-replace(dataset1$income_Yugoslavia, is.na(dataset1$income_Yugoslavia), 0)
-dataset1$vincome_GDR<-replace(dataset1$income_GDR, is.na(dataset1$income_GDR), 0)
+# YEET
+
+dataset1$income = dataset1$V135+dataset1$V136+dataset1$V137+dataset1$V138+dataset1$V139+dataset1$V140+dataset1$V141+dataset1$V142+dataset1$V143+dataset1$V144+dataset1$V145+dataset1$V146+dataset1$V147+dataset1$V148+dataset1$V149+dataset1$V150+dataset1$V151+dataset1$V152+dataset1$V153+dataset1$V154+dataset1$V155+dataset1$V156+dataset1$V157+dataset1$V158+dataset1$V159+dataset1$V160+dataset1$V161+dataset1$V162+dataset1$V163+dataset1$V164+dataset1$V165+dataset1$V166+dataset1$V167+dataset1$V168+dataset1$V169+dataset1$V170+dataset1$V171+dataset1$V172+dataset1$V173+dataset1$V174+dataset1$V175+dataset1$V176+dataset1$V177+dataset1$V178+dataset1$V179+dataset1$V180+dataset1$V181+dataset1$V182+dataset1$V183+dataset1$V184+dataset1$V185+dataset1$V186+dataset1$V187+dataset1$V188
 
 
-
-# Add all relevant columns to get the sum; if NA then you get 0 otherwise the value of the party
-#dataset1$vote_int <- (dataset1$vote_Albania+dataset1$vote_Armenia+dataset1$vote_Belarus+dataset1$V82+dataset1$V83+dataset1$V84+dataset1$V85+dataset1$V86+dataset1$V87+dataset1$V88+dataset1$V89+dataset1$V90+dataset1$V91+dataset1$V92+dataset1$V93+dataset1$V94+dataset1$V95+dataset1$V96+dataset1$V97+dataset1$V98+dataset1$V99+dataset1$V100)
-
-
-dataset1$income = (dataset1$income_Albania+dataset1$income_Armenia+dataset1$income_Belarus+dataset1$income_Bulgaria+dataset1$income_Croatia+dataset1$income_Czech+dataset1$income_Slovakia+dataset1$income_Estonia+dataset1$income_Hungary+dataset1$income_Latvia+dataset1$income_Lithuania+dataset1$income_Macedonia+dataset1$income_Poland+dataset1$income_Romania+dataset1$income_Russia+dataset1$income_Slovenia+dataset1$income_Ukraine+dataset1$income_Georgia+dataset1$income_Kazachstan+dataset1$income_Yugoslavia+dataset1$income_GDR) 
-
-
-# replace 0s to NAs
+# RUN
 
 dataset1$income[dataset1$income==0] <- NA
-dataset1$income_Albania[dataset1$income_Albania==0] <- NA
-dataset1$income_Albania[dataset1$income_Albania>=97] <- NA
-dataset1$income_Armenia[dataset1$income_Armenia==0] <- NA
-dataset1$income_Armenia[dataset1$income_Armenia>=97] <- NA
-dataset1$income_Belarus[dataset1$income_Belarus==0] <- NA
-dataset1$income_Belarus[dataset1$income_Belarus>=97] <- NA
-dataset1$income_Bulgaria[dataset1$income_Bulgaria==0] <- NA
-dataset1$income_Bulgaria[dataset1$income_Bulgaria>=97] <- NA
-dataset1$income_Croatia[dataset1$income_Croatia==0] <- NA
-dataset1$income_Croatia[dataset1$income_Croatia>=97] <- NA
-dataset1$income_CSSR[dataset1$income_CSSR==0] <- NA
-dataset1$income_CSSR[dataset1$income_CSSR>=97] <- NA
-dataset1$income_Czech[dataset1$income_Czech==0] <- NA
-dataset1$income_Czech[dataset1$income_Czech>=97] <- NA
-dataset1$income_Slovakia[dataset1$income_Slovakia==0] <- NA
-dataset1$income_Slovakia[dataset1$income_Slovakia>=97] <- NA
-dataset1$income_Estonia[dataset1$income_Estonia==0] <- NA
-dataset1$income_Estonia[dataset1$income_Estonia>=97] <- NA
-dataset1$income_Hungary[dataset1$income_Hungary==0] <- NA
-dataset1$income_Hungary[dataset1$income_Hungary>=97] <- NA
-dataset1$income_Latvia[dataset1$income_Latvia==0] <- NA
-dataset1$income_Latvia[dataset1$income_Latvia>=97] <- NA
-dataset1$income_Lithuania[dataset1$income_Lithuania==0] <- NA
-dataset1$income_Lithuania[dataset1$income_Lithuania>=97] <- NA
-dataset1$income_Macedonia[dataset1$income_Macedonia==0] <- NA
-dataset1$income_Macedonia[dataset1$income_Macedonia>=97] <- NA
-dataset1$income_Poland[dataset1$income_Poland==0] <- NA
-dataset1$income_Poland[dataset1$income_Poland>=97] <- NA
-dataset1$income_Romania[dataset1$income_Romania==0] <- NA
-dataset1$income_Romania[dataset1$income_Romania>=97] <- NA
-dataset1$income_Russia[dataset1$income_Russia==0] <- NA
-dataset1$income_Russia[dataset1$income_Russia>=97] <- NA
-dataset1$income_Slovenia[dataset1$income_Slovenia==0] <- NA
-dataset1$income_Slovenia[dataset1$income_Slovenia>=97] <- NA
-dataset1$income_Ukraine[dataset1$income_Ukraine==0] <- NA
-dataset1$income_Ukraine[dataset1$income_Ukraine>=97] <- NA
-dataset1$income_Georgia[dataset1$income_Georgia==0] <- NA
-dataset1$income_Georgia[dataset1$income_Georgia>=97] <- NA
-dataset1$income_Kazachstan[dataset1$income_Kazachstan==0] <- NA
-dataset1$income_Kazachstan[dataset1$income_Kazachstan>=97] <- NA
-dataset1$income_Yugoslavia[dataset1$income_Yugoslavia==0] <- NA
-dataset1$income_Yugoslavia[dataset1$income_Yugoslavia>=97] <- NA
-dataset1$income_GDR[dataset1$income_GDR==0] <- NA
-dataset1$income_GDR[dataset1$income_GDR>=97] <- NA
-
+dataset1$income[dataset1$income>=17] <-NA
 
 
 # condense dataset1
 
-dataset1 <- dataset1 %>% select(country_year, country=V3, year=V4, id=V6, better=V11, econpast=V10, finapast=V12, satisdmo=V19, voteint=vote_int, inclvote=voteinc, lrs=V76, married=V125, educ=V128, sex=V119, age=V120, sizehh=V126, occup=V132)
+dataset1 <- dataset1 %>% select(country_year, country=V3, year=V4, id=V6, better=V11, econpast=V10, finapast=V12, satisdmo=V19, voteint=vote_int, inclvote=voteinc, lrs=V76, married=V125, educ=V128, sex=V119, age=V120, sizehh=V126, occup=V132, income=income)
 
 
 # merge dataset
-datasetfull <- merge(dataset1, dataset2, by=c("country_year", "country", "year", "id", "better", "econpast", "finapast", "satisdmo", "voteint", "inclvote", "lrs", "married", "educ", "sex", "age", "sizehh", "occup"), all=TRUE)
+datasetfull <- merge(dataset1, dataset2, by=c("country_year", "country", "year", "id", "better", "econpast", "finapast", "satisdmo", "voteint", "inclvote", "lrs", "married", "educ", "sex", "age", "sizehh", "occup", "income"), all=TRUE)
 save(datasetfull, file="EAEurobarometer.RData")
 
 
