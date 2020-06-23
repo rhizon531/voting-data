@@ -32,7 +32,7 @@ dataset1 <- read_data(
 dataset2$nation2 <- factor(dataset2$nation2, levels = c(1:17), labels = c("France", "Belgium", "Netherlands", "Germany", "Italy", "Luxembourg", "Denmark", "Ireland", "UK", "Greece", "Spain", "Portugal", "Norway", "Finland", "Sweden", "Austria", "Switzerland"))
 dataset2$country_year <- paste(dataset2$nation2, dataset2$year, sep="_")
 
-dataset2 <- dataset2 %>% select(country_year, country=nation2, year, id, id2=split, id3=eb, better, econpast, finapast, satisdmo, closepty, feelclo, voteint, inclvote, lastvote, particip, lrs, party, married, educ, sex, age, sizehh, occup, soclass, income, region=regionat)
+dataset2 <- dataset2 %>% select(country_year, country=nation2, year, id, id2=split, id3=eb, better, econpast, finapast, satisdmo, closepty, feelclo, voteint, inclvote, lastvote, particip, lrs, party, married, educ, sex, age, sizehh, secoccup, occup, soclass, income, region=regionat)
 
 
 View(dataset2)
@@ -104,6 +104,14 @@ dataset1$vote_Yugoslavia<-replace(dataset1$vote_Yugoslavia, is.na(dataset1$vote_
 dataset1$vote_GDR<-replace(dataset1$vote_GDR, is.na(dataset1$vote_GDR), 0)
 dataset1$vote_Moldova<-replace(dataset1$vote_Moldova, is.na(dataset1$vote_Moldova), 0)
 
+
+# Add all relevant columns to get the sum; if NA then you get 0 otherwise the value of the party
+#dataset1$vote_int <- (dataset1$vote_Albania+dataset1$vote_Armenia+dataset1$vote_Belarus+dataset1$V82+dataset1$V83+dataset1$V84+dataset1$V85+dataset1$V86+dataset1$V87+dataset1$V88+dataset1$V89+dataset1$V90+dataset1$V91+dataset1$V92+dataset1$V93+dataset1$V94+dataset1$V95+dataset1$V96+dataset1$V97+dataset1$V98+dataset1$V99+dataset1$V100)
+
+
+dataset1$vote_int = (dataset1$vote_Albania+dataset1$vote_Armenia+dataset1$vote_Belarus+dataset1$vote_Bulgaria+dataset1$vote_Croatia+dataset1$vote_Czech+dataset1$vote_Slovakia+dataset1$vote_Estonia+dataset1$vote_Hungary+dataset1$vote_Latvia+dataset1$vote_Lithuania+dataset1$vote_Macedonia+dataset1$vote_Poland+dataset1$vote_Romania+dataset1$vote_Russia+dataset1$vote_Slovenia+dataset1$vote_Ukraine+dataset1$vote_Georgia+dataset1$vote_Kazachstan+dataset1$vote_Yugoslavia+dataset1$vote_GDR+dataset1$vote_Moldova) 
+
+
 #Replace 0s to NAs and no vote/spoil. no answer
 
 dataset1$vote_int[dataset1$vote_int==0] <- NA
@@ -136,11 +144,6 @@ dataset1$vote_int[dataset1$vote_GDR>=17] <- NA
 dataset1$vote_int[dataset1$vote_Moldova>=17] <- NA
 
 
-# Add all relevant columns to get the sum; if NA then you get 0 otherwise the value of the party
-#dataset1$vote_int <- (dataset1$vote_Albania+dataset1$vote_Armenia+dataset1$vote_Belarus+dataset1$V82+dataset1$V83+dataset1$V84+dataset1$V85+dataset1$V86+dataset1$V87+dataset1$V88+dataset1$V89+dataset1$V90+dataset1$V91+dataset1$V92+dataset1$V93+dataset1$V94+dataset1$V95+dataset1$V96+dataset1$V97+dataset1$V98+dataset1$V99+dataset1$V100)
-
-
-dataset1$vote_int = (dataset1$vote_Albania+dataset1$vote_Armenia+dataset1$vote_Belarus+dataset1$vote_Bulgaria+dataset1$vote_Croatia+dataset1$vote_Czech+dataset1$vote_Slovakia+dataset1$vote_Estonia+dataset1$vote_Hungary+dataset1$vote_Latvia+dataset1$vote_Lithuania+dataset1$vote_Macedonia+dataset1$vote_Poland+dataset1$vote_Romania+dataset1$vote_Russia+dataset1$vote_Slovenia+dataset1$vote_Ukraine+dataset1$vote_Georgia+dataset1$vote_Kazachstan+dataset1$vote_Yugoslavia+dataset1$vote_GDR+dataset1$vote_Moldova) 
 
 
 
@@ -287,7 +290,7 @@ dataset1$V188<-replace(dataset1$V188, is.na(dataset1$V188), 0)
 dataset1$income = dataset1$V135+dataset1$V136+dataset1$V137+dataset1$V138+dataset1$V139+dataset1$V140+dataset1$V141+dataset1$V142+dataset1$V143+dataset1$V144+dataset1$V145+dataset1$V146+dataset1$V147+dataset1$V148+dataset1$V149+dataset1$V150+dataset1$V151+dataset1$V152+dataset1$V153+dataset1$V154+dataset1$V155+dataset1$V156+dataset1$V157+dataset1$V158+dataset1$V159+dataset1$V160+dataset1$V161+dataset1$V162+dataset1$V163+dataset1$V164+dataset1$V165+dataset1$V166+dataset1$V167+dataset1$V168+dataset1$V169+dataset1$V170+dataset1$V171+dataset1$V172+dataset1$V173+dataset1$V174+dataset1$V175+dataset1$V176+dataset1$V177+dataset1$V178+dataset1$V179+dataset1$V180+dataset1$V181+dataset1$V182+dataset1$V183+dataset1$V184+dataset1$V185+dataset1$V186+dataset1$V187+dataset1$V188
 
 dataset1$income[dataset1$income==0] <- NA
-dataset1$income[dataset1$income>=17] <-NA
+dataset1$income[dataset1$income>=97] <-NA
 
 
 # region merging
@@ -317,13 +320,24 @@ dataset1$V236<-replace(dataset1$V236, is.na(dataset1$V236), 0)
 
 dataset1$region = (dataset1$V215+dataset1$V216+dataset1$V217+dataset1$V218+dataset1$V219+dataset1$V220+dataset1$V221+dataset1$V222+dataset1$V223+dataset1$V224+dataset1$V225+dataset1$V226+dataset1$V227+dataset1$V228+dataset1$V229+dataset1$V230+dataset1$V231+dataset1$V232+dataset1$V233+dataset1$V234+dataset1$V235+dataset1$V236)
 
-dataset1$region[dataset1$region==0] <- NA
-dataset1$region[dataset1$region>=9] <- NA
+dataset1$region[dataset1$region==0]<-NA
 
+
+## occupation sector
+
+dataset1$V130<-replace(dataset1$V130, is.na(dataset1$V130), 0)
+dataset1$V131<-replace(dataset1$V131, is.na(dataset1$V131), 0)
+
+dataset1$secoccup = dataset1$V130+dataset1$V131
+
+dataset1$secoccup[dataset1$secoccup==0]<-NA
+dataset1$secoccup[dataset1$secoccup>=98]<-NA
+
+table(dataset1$country,dataset1$secoccup)
 
 # condense dataset1
 
-dataset1 <- dataset1 %>% select(country_year, country=V3, year=V4, id=V6, better=V11, econpast=V10, finapast=V12, satisdmo=V19, voteint=vote_int, inclvote=voteinc, lrs=V76, married=V125, educ=V128, sex=V119, age=V120, sizehh=V126, occup=V132, income=income, region=region)
+dataset1 <- dataset1 %>% select(country_year, country=V3, year=V4, id=V6, better=V11, econpast=V10, finapast=V12, satisdmo=V19, voteint=vote_int, inclvote=voteinc, lrs=V76, married=V125, educ=V128, sex=V119, age=V120, sizehh=V126, secoccup=secoccup, occup=V132, income=income, region=region, econfuture=V11, finafuture=V13, freemarket=V14, reform=V17)
 
 
 # merge dataset
