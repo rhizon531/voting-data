@@ -324,6 +324,54 @@ dataset1$vincome_GDR<-replace(dataset1$income_GDR, is.na(dataset1$income_GDR), 0
 dataset1$income = (dataset1$income_Albania+dataset1$income_Armenia+dataset1$income_Belarus+dataset1$income_Bulgaria+dataset1$income_Croatia+dataset1$income_Czech+dataset1$income_Slovakia+dataset1$income_Estonia+dataset1$income_Hungary+dataset1$income_Latvia+dataset1$income_Lithuania+dataset1$income_Macedonia+dataset1$income_Poland+dataset1$income_Romania+dataset1$income_Russia+dataset1$income_Slovenia+dataset1$income_Ukraine+dataset1$income_Georgia+dataset1$income_Kazachstan+dataset1$income_Yugoslavia+dataset1$income_GDR) 
 
 
+# replace 0s to NAs
+
+dataset1$income[dataset1$income==0] <- NA
+dataset1$income_Albania[dataset1$income_Albania==0] <- NA
+dataset1$income_Albania[dataset1$income_Albania>=97] <- NA
+dataset1$income_Armenia[dataset1$income_Armenia==0] <- NA
+dataset1$income_Armenia[dataset1$income_Armenia>=97] <- NA
+dataset1$income_Belarus[dataset1$income_Belarus==0] <- NA
+dataset1$income_Belarus[dataset1$income_Belarus>=97] <- NA
+dataset1$income_Bulgaria[dataset1$income_Bulgaria==0] <- NA
+dataset1$income_Bulgaria[dataset1$income_Bulgaria>=97] <- NA
+dataset1$income_Croatia[dataset1$income_Croatia==0] <- NA
+dataset1$income_Croatia[dataset1$income_Croatia>=97] <- NA
+dataset1$income_CSSR[dataset1$income_CSSR==0] <- NA
+dataset1$income_CSSR[dataset1$income_CSSR>=97] <- NA
+dataset1$income_Czech[dataset1$income_Czech==0] <- NA
+dataset1$income_Czech[dataset1$income_Czech>=97] <- NA
+dataset1$income_Slovakia[dataset1$income_Slovakia==0] <- NA
+dataset1$income_Slovakia[dataset1$income_Slovakia>=97] <- NA
+dataset1$income_Estonia[dataset1$income_Estonia==0] <- NA
+dataset1$income_Estonia[dataset1$income_Estonia>=97] <- NA
+dataset1$income_Hungary[dataset1$income_Hungary==0] <- NA
+dataset1$income_Hungary[dataset1$income_Hungary>=97] <- NA
+dataset1$income_Latvia[dataset1$income_Latvia==0] <- NA
+dataset1$income_Latvia[dataset1$income_Latvia>=97] <- NA
+dataset1$income_Lithuania[dataset1$income_Lithuania==0] <- NA
+dataset1$income_Lithuania[dataset1$income_Lithuania>=97] <- NA
+dataset1$income_Macedonia[dataset1$income_Macedonia==0] <- NA
+dataset1$income_Macedonia[dataset1$income_Macedonia>=97] <- NA
+dataset1$income_Poland[dataset1$income_Poland==0] <- NA
+dataset1$income_Poland[dataset1$income_Poland>=97] <- NA
+dataset1$income_Romania[dataset1$income_Romania==0] <- NA
+dataset1$income_Romania[dataset1$income_Romania>=97] <- NA
+dataset1$income_Russia[dataset1$income_Russia==0] <- NA
+dataset1$income_Russia[dataset1$income_Russia>=97] <- NA
+dataset1$income_Slovenia[dataset1$income_Slovenia==0] <- NA
+dataset1$income_Slovenia[dataset1$income_Slovenia>=97] <- NA
+dataset1$income_Ukraine[dataset1$income_Ukraine==0] <- NA
+dataset1$income_Ukraine[dataset1$income_Ukraine>=97] <- NA
+dataset1$income_Georgia[dataset1$income_Georgia==0] <- NA
+dataset1$income_Georgia[dataset1$income_Georgia>=97] <- NA
+dataset1$income_Kazachstan[dataset1$income_Kazachstan==0] <- NA
+dataset1$income_Kazachstan[dataset1$income_Kazachstan>=97] <- NA
+dataset1$income_Yugoslavia[dataset1$income_Yugoslavia==0] <- NA
+dataset1$income_Yugoslavia[dataset1$income_Yugoslavia>=97] <- NA
+dataset1$income_GDR[dataset1$income_GDR==0] <- NA
+dataset1$income_GDR[dataset1$income_GDR>=97] <- NA
+
 
 
 # condense dataset1
