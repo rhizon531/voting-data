@@ -341,9 +341,11 @@ dataset1 <- dataset1 %>% select(country_year, country=V3, year=V4, id=V6, better
 
 
 # merge dataset
-datasetfull <- merge(dataset1, dataset2, by=c("country_year", "country", "year", "id", "better", "econpast", "finapast", "satisdmo", "voteint", "inclvote", "lrs", "married", "educ", "sex", "age", "sizehh", "secoccup", "occup", "income", "region"), all=TRUE)
+datasetfull <- merge(dataset1, dataset2, by="country_year", all=TRUE)
 save(datasetfull, file="EAEurobarometer.RData")
 
 
+## annex bc i might need this
 
+# c("country_year", "country", "year", "id", "better", "econpast", "finapast", "satisdmo","voteint", "inclvote", "lrs", "married", "educ", "sex", "age", "sizehh", "secoccup", "occup", "income", "region")
 
